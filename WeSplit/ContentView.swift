@@ -13,6 +13,10 @@ struct ContentView: View {
     @State private var tipPercentage = 20
     @FocusState private var amountIsFocused: Bool
     
+    var currency: FloatingPointFormatStyle<Double>.Currency {
+        FloatingPointFormatStyle<Double>.Currency(code: Locale.current.currency?.identifier ?? "USD")
+    }
+    
     var totalAmount: Double {
         Double(checkAmount)
     }
@@ -34,7 +38,7 @@ struct ContentView: View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    TextField("Amount", value: $checkAmount, format: currency)
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
                     
@@ -57,19 +61,19 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text(totalAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalAmount, format: currency)
                 } header: {
                     Text("Total Amount")
                 }
                 
                 Section {
-                    Text(tipValue, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(tipValue, format: currency)
                 } header: {
                     Text("Tip value")
                 }
                 
                 Section {
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalPerPerson, format: currency)
                 } header: {
                     Text("Amount per person")
                 }
