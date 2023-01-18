@@ -20,6 +20,7 @@ struct ContentView: View {
     var totalAmount: Double {
         Double(checkAmount)
     }
+    
     var tipValue: Double {
         checkAmount / 100 * Double(tipPercentage)
     }
@@ -62,6 +63,7 @@ struct ContentView: View {
                 
                 Section {
                     Text(totalAmount, format: currency)
+                        .foregroundColor(tipPercentage == 0 ? .red : .primary)
                 } header: {
                     Text("Total Amount")
                 }
